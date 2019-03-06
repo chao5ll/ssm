@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ssm.repository.UserMapper">
+
+    <!--<resultMap id="usersResultMap" type="com.example.ssm.domain.User">-->
+        <!--<id column="id" property="id" jdbcType="INTEGER" javaType="int"/>-->
+        <!--<result column="name" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+        <!--<result column="age" property="age"-->
+                <!--javaType="int" jdbcType="INTEGER"/>-->
+    <!--</resultMap>-->
+
+    <insert id="saveUser" parameterType="com.example.ssm.domain.User">
+        insert into ssm_test.USERs(ID,NAME,AGE,sign_time)
+        values (#{id},#{name},#{age},#{signInDate})
+    </insert>
+    <select id="selectUser" parameterType="com.example.ssm.domain.User"
+    resultType="com.example.ssm.domain.User">
+    select * from ssm_test.USERs WHERE name=#{name}  and AGE=#{age}
+  </select>
+    <select id="findUserCount" resultType="int">
+        select count(*) from ssm_test.USERs
+    </select>
+    <select id="showPage" resultType="com.example.ssm.domain.User">
+        select * from ssm_test.USERs limit #{start},#{pageSize}
+    </select>
+    <!--resultMap="usersResultMap"-->
+    <delete id="deleteById" parameterType="com.example.ssm.domain.User" >
+        delete from ssm_test.USERs where id=#{id}
+    </delete>
+</mapper>
